@@ -1,4 +1,4 @@
-"""Test client for the API Key MCP server.
+"""Test client for the Attio MCP server.
 
 Two modes:
 
@@ -6,8 +6,7 @@ Two modes:
        python -m src.client --test-connection
 
    Uses ConnectionTester to verify your Connection config and credentials
-   work against the target platform. Edit the test path below to match a
-   lightweight endpoint from your platform (e.g. "/user" for GitHub).
+   work against the Attio API.
 
 2. Test tools (server must be running):
        python -m src.main        # in one terminal
@@ -24,15 +23,10 @@ load_dotenv()
 async def test_connection() -> None:
     """Verify the DAuth connection config and credentials without a running server."""
     from dedalus_mcp.testing import ConnectionTester, TestRequest
-    from src.main import platform_connection
+    from src.attio.config import attio
 
-    tester = ConnectionTester.from_env(platform_connection)
-
-    # Replace "/user" with a lightweight endpoint from your target platform:
-    #   GitHub:  "/user"
-    #   Slack:   "/api/auth.test"
-    #   Discord: "/users/@me"
-    response = await tester.request(TestRequest(path="/user"))
+    tester = ConnectionTester.from_env(attio)
+    response = await tester.request(TestRequest(path="/v2/self"))
 
     if response.success:
         print(f"OK {response.status} — Connection works!")
@@ -51,11 +45,14 @@ async def test_tools() -> None:
     tools = await client.list_tools()
     print("Available tools:", [t.name for t in tools.tools])
 
-    result = await client.call_tool("example_tool", {"input_text": "hello", "multiplier": 3})
-    print("example_tool result:", result.content[0].text)
+    result = await client.call_tool("attio_list_people", {"limit": 3})
+    print("attio_list_people result:", result.content[0].text)
 
-    result = await client.call_tool("fetch_resource", {"resource_id": "abc-123"})
-    print("fetch_resource result:", result.content[0].text)
+    result = await client.call_tool(
+        "attio_list_attributes",
+        {"target": "objects", "target_slug": "people"},
+    )
+    print("attio_list_attributes result:", result.content[0].text)
 
     await client.close()
 

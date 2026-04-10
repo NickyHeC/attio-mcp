@@ -1,7 +1,7 @@
 [project]
-name = "mcp-template"
+name = "attio-mcp"
 version = "0.1.0"
-description = "A template MCP server for quickly starting a new project"
+description = "MCP server for Attio CRM — manage people, companies, deals, and lists"
 requires-python = ">=3.10"
 dependencies = [
     "dedalus-mcp",
@@ -16,5 +16,5 @@ dev = []
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.hatchling.build]
-targets.wheel.packages = ["src"]
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
