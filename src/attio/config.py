@@ -17,7 +17,7 @@ from dedalus_mcp.auth import Connection, SecretKeys
 
 
 attio = Connection(
-    name="attio",
+    name="attio-mcp",
     secrets=SecretKeys(token="ATTIO_API_TOKEN"),  # noqa: S106
     base_url="https://api.attio.com",
     auth_header_format="Bearer {api_key}",
