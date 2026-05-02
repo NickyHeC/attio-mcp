@@ -66,17 +66,24 @@ class PersonInfo:
     """Person record with extracted key fields."""
 
     # fmt: off
-    record_id:       str
-    full_name:       str | None       = None
-    first_name:      str | None       = None
-    last_name:       str | None       = None
-    email_addresses: list[str]        = field(default_factory=list)
-    phone_numbers:   list[str]        = field(default_factory=list)
-    job_title:       str | None       = None
-    company_id:      str | None       = None
-    description:     str | None       = None
-    web_url:         str | None       = None
-    created_at:      str | None       = None
+    record_id:                str
+    full_name:                str | None       = None
+    first_name:               str | None       = None
+    last_name:                str | None       = None
+    email_addresses:          list[str]        = field(default_factory=list)
+    phone_numbers:            list[str]        = field(default_factory=list)
+    job_title:                str | None       = None
+    company_id:               str | None       = None
+    description:              str | None       = None
+    connection_strength:      str | None       = None
+    last_interaction:         str | None       = None
+    last_email_interaction:   str | None       = None
+    last_meeting_interaction: str | None       = None
+    first_interaction:        str | None       = None
+    linkedin:                 str | None       = None
+    location:                 str | None       = None
+    web_url:                  str | None       = None
+    created_at:               str | None       = None
     # fmt: on
 
 
@@ -85,12 +92,23 @@ class CompanyInfo:
     """Company record with extracted key fields."""
 
     # fmt: off
-    record_id:   str
-    name:        str | None       = None
-    domains:     list[str]        = field(default_factory=list)
-    description: str | None       = None
-    web_url:     str | None       = None
-    created_at:  str | None       = None
+    record_id:                str
+    name:                     str | None       = None
+    domains:                  list[str]        = field(default_factory=list)
+    description:              str | None       = None
+    connection_strength:      str | None       = None
+    last_interaction:         str | None       = None
+    last_email_interaction:   str | None       = None
+    last_meeting_interaction: str | None       = None
+    first_interaction:        str | None       = None
+    employee_range:           str | None       = None
+    location:                 str | None       = None
+    category:                 str | None       = None
+    linkedin:                 str | None       = None
+    twitter:                  str | None       = None
+    foundation_date:          str | None       = None
+    web_url:                  str | None       = None
+    created_at:               str | None       = None
     # fmt: on
 
 

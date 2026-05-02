@@ -14,7 +14,15 @@ from typing import Any
 from dedalus_mcp import HttpMethod, tool
 from dedalus_mcp.types import ToolAnnotations
 
-from src.attio.request import _domains, _opt_str, _text, api_request
+from src.attio.request import (
+    _domains,
+    _interaction,
+    _location,
+    _opt_str,
+    _option_title,
+    _text,
+    api_request,
+)
 from src.attio.types import AttioResult, CompanyInfo, JSONObject
 
 
@@ -37,6 +45,17 @@ def _parse_company(raw: JSONObject) -> CompanyInfo:
         name=_text(values.get("name")),
         domains=_domains(values.get("domains")),
         description=_text(values.get("description")),
+        connection_strength=_option_title(values.get("strongest_connection_strength")),
+        last_interaction=_interaction(values.get("last_interaction")),
+        last_email_interaction=_interaction(values.get("last_email_interaction")),
+        last_meeting_interaction=_interaction(values.get("last_meeting_interaction")),
+        first_interaction=_interaction(values.get("first_interaction")),
+        employee_range=_text(values.get("estimated_arr_range")) or _text(values.get("employee_range")),
+        location=_location(values.get("primary_location")),
+        category=_text(values.get("categories")),
+        linkedin=_text(values.get("linkedin")),
+        twitter=_text(values.get("twitter")),
+        foundation_date=_text(values.get("foundation_date")),
         web_url=_opt_str(raw.get("web_url")),
         created_at=_opt_str(raw.get("created_at")),
     )

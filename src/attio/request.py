@@ -167,6 +167,29 @@ def _record_ref(values_list: Any) -> str | None:  # noqa: ANN401
     return str(v["target_record_id"]) if v and "target_record_id" in v else None
 
 
+def _option_title(values_list: Any) -> str | None:  # noqa: ANN401
+    """Extract the option title from a select/option attribute array."""
+    v = _first_val(values_list)
+    if v and isinstance(v.get("option"), dict):
+        return str(v["option"].get("title", ""))
+    return None
+
+
+def _interaction(values_list: Any) -> str | None:  # noqa: ANN401
+    """Extract an interaction timestamp as ISO string from an interaction attribute."""
+    v = _first_val(values_list)
+    return str(v["interacted_at"]) if v and "interacted_at" in v else None
+
+
+def _location(values_list: Any) -> str | None:  # noqa: ANN401
+    """Extract a human-readable location string from an address attribute."""
+    v = _first_val(values_list)
+    if not v:
+        return None
+    parts = [v.get(k) for k in ("locality", "region", "country_code") if v.get(k)]
+    return ", ".join(parts) if parts else None
+
+
 def _opt_str(val: Any) -> str | None:  # noqa: ANN401
     """Safely coerce to optional string."""
     return str(val) if val is not None else None

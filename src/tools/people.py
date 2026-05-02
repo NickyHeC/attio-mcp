@@ -16,8 +16,11 @@ from dedalus_mcp.types import ToolAnnotations
 
 from src.attio.request import (
     _emails,
+    _interaction,
+    _location,
     _name_field,
     _opt_str,
+    _option_title,
     _phones,
     _record_ref,
     _text,
@@ -50,6 +53,13 @@ def _parse_person(raw: JSONObject) -> PersonInfo:
         job_title=_text(values.get("job_title")),
         company_id=_record_ref(values.get("company")),
         description=_text(values.get("description")),
+        connection_strength=_option_title(values.get("strongest_connection_strength")),
+        last_interaction=_interaction(values.get("last_interaction")),
+        last_email_interaction=_interaction(values.get("last_email_interaction")),
+        last_meeting_interaction=_interaction(values.get("last_meeting_interaction")),
+        first_interaction=_interaction(values.get("first_interaction")),
+        linkedin=_text(values.get("linkedin")),
+        location=_location(values.get("primary_location")),
         web_url=_opt_str(raw.get("web_url")),
         created_at=_opt_str(raw.get("created_at")),
     )
